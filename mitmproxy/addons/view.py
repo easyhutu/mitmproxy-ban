@@ -147,7 +147,7 @@ class View(collections.abc.Sequence):
             size=OrderKeySize(self),
         )
         self.order_key = self.default_order
-        self.order_reversed = False
+        self.order_reversed = True
         self.focus_follow = False
 
         self._view = sortedcontainers.SortedListWithKey(key=self.order_key)
@@ -172,7 +172,16 @@ class View(collections.abc.Sequence):
         self.focus = Focus(self)
         self.settings = Settings(self)
 
+        self.max_flows = 300
+        self._remove_flows_count = 10
+
     def load(self, loader):
+        loader.add_option(
+            "max_flows",
+            int,
+            300,
+            "运行保存的最大请求记录数量，超出会将历史记录清除"
+        )
         loader.add_option(
             "view_filter", Optional[str], None, "Limit the view to matching flows."
         )
@@ -184,7 +193,7 @@ class View(collections.abc.Sequence):
             choices=list(map(lambda c: c[1], orders)),
         )
         loader.add_option(
-            "view_order_reversed", bool, False, "Reverse the sorting order."
+            "view_order_reversed", bool, True, "Reverse the sorting order."
         )
         loader.add_option(
             "console_focus_follow", bool, False, "Focus follows new flows."
@@ -503,6 +512,10 @@ class View(collections.abc.Sequence):
                     if self.focus_follow:
                         self.focus.flow = f
                     self.sig_view_add.send(self, flow=f)
+        self.set_reversed(self.order_reversed)
+        if self.store_count() > self.max_flows+self._remove_flows_count:
+            fids = list(self._store.keys())[:self.store_count() - self.max_flows]
+            self.remove([self._store[fid] for fid in fids])
 
     def get_by_id(self, flow_id: str) -> Optional[mitmproxy.flow.Flow]:
         """
@@ -543,6 +556,9 @@ class View(collections.abc.Sequence):
 
     # Event handlers
     def configure(self, updated):
+        if "max_flows" in updated:
+            if ctx.options.max_flows > self._remove_flows_count:
+                self.max_flows = ctx.options.max_flows
         if "view_filter" in updated:
             filt = None
             if ctx.options.view_filter:

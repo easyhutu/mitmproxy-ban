@@ -4,6 +4,7 @@
  */
 
 interface ConfState {
+    ip: string
     static: boolean
     version: string
     contentViews: string[]
@@ -11,6 +12,7 @@ interface ConfState {
 
 // @ts-ignore
 export const defaultState: ConfState = window.MITMWEB_CONF || {
+    ip: "0.0.0.0",
     static: false,
     version: "1.2.3",
     contentViews: ["Auto", "Raw"],

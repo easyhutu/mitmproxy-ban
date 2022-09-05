@@ -33,3 +33,74 @@ class Data:
 
 
 pkg_data = Data(__name__).push("..")
+
+
+def dict_to_value(data: dict, keys):
+    val = data
+    if isinstance(keys, list):
+        for key in keys:
+            try:
+                if val:
+                    if isinstance(key, int):
+                        try:
+                            val = val[key]
+                        except:
+                            val = val.get(str(key))
+                    elif isinstance(key, str):
+                        if key.startswith('$'):
+                            new_key = key[1:]
+                            if val.get(new_key) is not None:
+                                val = val.get(new_key)
+                            else:
+                                val = val.get(key)
+                        else:
+                            val = val.get(key)
+                    if val == data:
+                        break
+                else:
+                    break
+            except Exception as e:
+                print(key, data)
+                raise Exception(e)
+
+    if isinstance(keys, str) and '.' in keys:
+        if '[' in keys:
+            keys = keys.replace('[', '.')
+        if ']' in keys:
+            keys = keys.replace(']', '')
+        keys = keys.split('.')
+        for key in keys:
+            try:
+                try:
+                    key = int(key)
+                except:
+                    pass
+                if val:
+                    if isinstance(key, int):
+                        try:
+                            val = val[key]
+                        except:
+                            val = val.get(str(key))
+                    elif isinstance(key, str):
+                        if key.startswith('$'):
+                            new_key = key[1:]
+                            if val.get(new_key) is not None:
+                                val = val.get(new_key)
+                            else:
+                                val = val.get(key)
+                        else:
+                            if val.get(key) is not None:
+                                val = val.get(key)
+                            else:
+                                val = val.get('${}'.format(key))
+                    if val == data:
+                        break
+                else:
+                    break
+            except Exception as e:
+                print(key, data)
+                raise Exception(e)
+    elif isinstance(keys, str):
+        val = val.get(keys)
+
+    return val

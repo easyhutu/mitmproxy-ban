@@ -26,6 +26,7 @@ from mitmproxy.addons import stickycookie
 from mitmproxy.addons import save
 from mitmproxy.addons import tlsconfig
 from mitmproxy.addons import upstream_auth
+from mitmproxy.addons import resource
 
 
 def default_addons():
@@ -58,4 +59,5 @@ def default_addons():
         save.Save(),
         tlsconfig.TlsConfig(),
         upstream_auth.UpstreamAuth(),
+        resource.ResourceAddon()
     ]

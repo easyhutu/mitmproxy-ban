@@ -5,6 +5,7 @@ import {useAppSelector} from "../ducks";
 
 export default function Footer() {
     const version = useAppSelector(state => state.conf.version);
+    const ip = useAppSelector(state => state.conf.ip);
     let {
         mode, intercept, showhost, upstream_cert, rawtcp, dns_server, http2, websocket, anticache, anticomp,
         stickyauth, stickycookie, stream_large_bodies, listen_host, listen_port, server, ssl_insecure
@@ -12,6 +13,7 @@ export default function Footer() {
 
     return (
         <footer>
+            <span className="label label-success">{ip} *:{listen_port}</span>
             {mode && mode !== "regular" && (
                 <span className="label label-success">{mode} mode</span>
             )}
@@ -55,14 +57,6 @@ export default function Footer() {
                 <span className="label label-success">stream: {formatSize(stream_large_bodies)}</span>
             )}
             <div className="pull-right">
-                <HideInStatic>
-                    {
-                        server && (
-                            <span className="label label-primary" title="HTTP Proxy Server Address">
-                        {listen_host || "*"}:{listen_port}
-                    </span>)
-                    }
-                </HideInStatic>
                 <span className="label label-default" title="Mitmproxy Version">
             mitmproxy {version}
             </span>

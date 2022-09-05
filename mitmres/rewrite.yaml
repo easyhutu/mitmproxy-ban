@@ -1,0 +1,6 @@
+/x/info/eg/path:
+  headers:
+    request:
+      key1: value
+    response:
+      key2: value

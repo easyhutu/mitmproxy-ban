@@ -27,6 +27,7 @@ from mitmproxy.http import HTTPFlow
 from mitmproxy.tcp import TCPFlow, TCPMessage
 from mitmproxy.utils.emoji import emoji
 from mitmproxy.utils.strutils import always_str
+from mitmproxy.utils.dev import host_ip
 from mitmproxy.websocket import WebSocketMessage
 
 
@@ -606,6 +607,7 @@ class DnsRebind(RequestHandler):
 class Conf(RequestHandler):
     def get(self):
         conf = {
+            "ip": host_ip(),
             "static": False,
             "version": version.VERSION,
             "contentViews": [v.name for v in contentviews.views if v.name != "Query"],
