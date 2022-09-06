@@ -16,6 +16,15 @@
 4. 增加默认rewrite headers，response 配置文件，方便操作
 
 ### 安装方法
-> 手动安装
+* 源码安装
 
-下载项目，进入根目录执行：python setup.py install
+下载项目，进入根目录执行：
+```shell
+python setup.py install
+```
+
+* 渠道安装
+
+```shell
+pip install mitmproxy-ban
+```

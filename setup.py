@@ -19,7 +19,7 @@ with open(os.path.join(here, "mitmproxy", "version.py")) as f:
     VERSION = match.group(1)
 
 setup(
-    name="mitmproxy",
+    name="mitmproxy-ban",
     version=VERSION,
     description="An interactive, SSL/TLS-capable intercepting proxy for HTTP/1, HTTP/2, and WebSockets.",
     long_description=long_description,
@@ -48,8 +48,8 @@ setup(
     ],
     project_urls={
         "Documentation": "https://docs.mitmproxy.org/stable/",
-        "Source": "https://github.com/mitmproxy/mitmproxy/",
-        "Tracker": "https://github.com/mitmproxy/mitmproxy/issues",
+        "Source": "https://github.com/easyhutu/mitmproxy-ban/",
+        "Tracker": "https://github.com/easyhutu/mitmproxy-ban/issues/",
     },
     packages=find_packages(
         include=[
