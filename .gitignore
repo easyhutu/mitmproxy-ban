@@ -19,7 +19,7 @@ mitmproxy/contrib/kaitaistruct/*.ksy
 __pycache__
 .hypothesis/
 .hugo_build.lock
-
+.run.py
 # UI
 
 node_modules

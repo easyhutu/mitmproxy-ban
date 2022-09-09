@@ -12,6 +12,8 @@ import {useAppDispatch, useAppSelector} from "../ducks";
 import {Flow} from "../flow";
 import classnames from "classnames";
 import TcpMessages from "./FlowView/TcpMessages";
+import {update} from "../ducks/utils/store";
+import {disableSelect, select} from "../ducks/flows";
 
 type TabProps = {
     flow: Flow
@@ -69,6 +71,13 @@ export default function FlowView() {
 
     return (
         <div className="flow-detail">
+            <a title="收起详情页" className="close-backtop"
+               onClick={event => {
+                   dispatch(select())
+               }}
+            >
+                <i className="fa fa-close"></i>
+            </a>
             <nav className="nav-tabs nav-tabs-sm">
                 {tabs.map(tabId => (
                     <a key={tabId} href="#" className={classnames({active: active === tabId})}

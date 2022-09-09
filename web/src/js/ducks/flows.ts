@@ -228,3 +228,9 @@ export function select(id?: string) {
         flowIds: id ? [id] : []
     }
 }
+
+export function disableSelect() {
+    return {
+        type: REMOVE,
+    }
+}
