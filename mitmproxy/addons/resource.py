@@ -20,8 +20,6 @@ class ResourceInfo:
         try:
             os.mkdir(self._resource_path)
             os.mkdir(self.response_path)
-            with open(os.path.join(self._resource_path, self.temp.tname.public_rewrite), 'w', encoding='u8') as f:
-                f.write(self.temp.public_rewrite())
             with open(os.path.join(self._resource_path, self.temp.tname.rewrite), 'w', encoding='u8') as f:
                 f.write(self.temp.rewrite())
             with open(os.path.join(self._resource_path, self.temp.tname.readme), 'w', encoding='u8') as f:
@@ -51,7 +49,6 @@ class ResourceAddon:
             self.rewrite_meta.watch_file()
 
     def done(self):
-        ctx.log.info("close watch rewrite file...")
         self.rewrite_meta.cancel_watch_file()
 
     def request(self, flow: http.HTTPFlow):
