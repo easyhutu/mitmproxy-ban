@@ -5,11 +5,11 @@
   response:
     headers:
       kkk: ssssll
-/intl/gateway/v2/app/feed/home:
+/url/path:
   request:
     headers:
-      key1: value
+      key1:
   response:
     headers:
       key2: value
-    content: {"msg": "ok"}
+    content:

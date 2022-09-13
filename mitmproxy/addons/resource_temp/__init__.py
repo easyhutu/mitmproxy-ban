@@ -129,14 +129,15 @@ class RewriteMeta:
 
         r = getattr(flow, ty)
         for k, v in headers.items():
-            r.headers[k] = v
+            if v:
+                r.headers[k] = v
 
     def _u_content(self, flow, ty: str):
         path = urlparse(flow.request.url).path
         if not self.has_path(path):
             return None
         content = self._generator_content(path, ty)
-        if content:
+        if content is not False:
             r = getattr(flow, ty)
             r.content = content
             r.headers['mock-status'] = 'ok'
@@ -148,8 +149,8 @@ class RewriteMeta:
         if isinstance(val, bytes):
             return val
         if isinstance(val, str):
-            return self.files.get(val) or val
-        return str(val).encode('u8')
+            return self.files.get(val) or val.encode('u8')
+        return False
 
     def has_path(self, path):
         return path in self.url_paths or self.public
