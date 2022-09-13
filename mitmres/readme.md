@@ -22,5 +22,4 @@ path配置文件，根据指定path进行rewrite操作
 
 > response/xxx.json 
    
-rewrite response文件夹，在rewrite.yaml中配置xxx.json
-
+rewrite response文件夹，针对mock响应内容较长，在rewrite.yaml中的content配置xxx.json
