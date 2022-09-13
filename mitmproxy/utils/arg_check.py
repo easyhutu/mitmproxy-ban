@@ -63,6 +63,7 @@ REPLACED = """
 """
 
 REPLACEMENTS = {
+    "--enable-resource": "enable_resource",
     "--stream": "stream_large_bodies",
     "--palette": "console_palette",
     "--palette-transparent": "console_palette_transparent:",

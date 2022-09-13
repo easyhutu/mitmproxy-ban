@@ -14,6 +14,9 @@ class Options(optmanager.OptManager):
     def __init__(self, **kwargs) -> None:
         super().__init__()
         self.add_option(
+            'enable_resource', bool, True, "是否启用rewrite资源配置"
+        )
+        self.add_option(
             "server", bool, True, "Start a proxy server. Enabled by default."
         )
         self.add_option(

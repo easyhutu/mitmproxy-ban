@@ -1,7 +1,15 @@
-/x/info/eg/path:
-  headers:
-    request:
+'@all':
+  request:
+    headers:
+      key22: val22sdlf
+  response:
+    headers:
+      kkk: ssssll
+/intl/gateway/v2/app/feed/home:
+  request:
+    headers:
       key1: value
-    response:
+  response:
+    headers:
       key2: value
-  reply:
+    content: {"msg": "ok"}

@@ -1,6 +1,13 @@
-/x/info/eg/path:
-  headers:
-    request:
-      key1: value
-    response:
-      key2: value
+'@all':
+   request:
+     headers:
+       h1: h1
+/x/path/info:
+  request:
+    headers:
+      h2: h2
+  response:
+    headers:
+      h3: h3
+    content: {'status': 0}
+

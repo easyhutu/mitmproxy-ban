@@ -56,6 +56,10 @@ def common_options(parser, opts):
     opts.make_parser(parser, "save_stream_file", metavar="PATH", short="w")
     opts.make_parser(parser, "anticomp")
 
+    # resource options
+    group = parser.add_argument_group("Resource Options")
+    opts.make_parser(group, "enable_resource")
+
     # Proxy options
     group = parser.add_argument_group("Proxy Options")
     opts.make_parser(group, "listen_host", metavar="HOST")

@@ -13,7 +13,7 @@
 1. 限制flows数量，防止flows请求记录太多导致浏览器卡顿
 2. web端默认请求记录倒序排列，瀑布式展示请求记录，符合日常使用习惯
 3. mitmweb 页脚显示当前ip地址，设置代理更方便
-4. 增加默认rewrite headers，response 配置文件，方便操作
+4. 增加默认rewrite headers，response 配置文件，方便操作[配置方式](mitmres/readme.md)
 
 ### 安装方法
 * 源码安装
