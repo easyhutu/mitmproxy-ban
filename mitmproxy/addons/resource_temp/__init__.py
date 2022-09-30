@@ -39,7 +39,7 @@ class RContent:
     def _join_path(self, filename):
         return os.path.join(self.path, filename)
 
-    def update(self):
+    async def up_files(self):
         now_filenames = os.listdir(self.path)
         for filename in now_filenames:
             try:
@@ -48,7 +48,7 @@ class RContent:
                 ctx.log.error(f'{self.path} not found ignore')
                 continue
             if nmt == self.files_info.get(filename):
-                break
+                continue
             ctx.log.info(self._join_path(filename))
             self.files_info[filename] = nmt
             with open(self._join_path(filename), 'rb') as f:
@@ -86,11 +86,11 @@ class RewriteMeta:
 
     async def watcher(self):
         while True:
-            self.update()
-            self.files.update()
+            await self.up_files()
+            await self.files.up_files()
             await asyncio.sleep(self.ReloadInterval)
 
-    def update(self):
+    async def up_files(self):
         try:
             now_mtime = os.stat(self.path).st_mtime
         except FileNotFoundError:

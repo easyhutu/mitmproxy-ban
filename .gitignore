@@ -20,6 +20,8 @@ __pycache__
 .hypothesis/
 .hugo_build.lock
 .run.py
+/mitmres
+
 # UI
 
 node_modules
